@@ -17,8 +17,9 @@ var _ = require('lodash'),
 
 function outputFile(options, conf, base64) {
     var format = options.format || DEF_FORMAT;
-    return conf.storage + path.sep + base64 + '.' + format;
+    return conf.storage + path.sep + utils.getSimpleHash(base64) + '.' + format;
 }
+
 
 function cliCommand(config) {
     var engine = config.engine || DEF_ENGINE,

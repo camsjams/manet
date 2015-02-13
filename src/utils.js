@@ -41,6 +41,15 @@ function encodeBase64(json) {
     return buffer.toString('base64');
 }
 
+function getSimpleHash(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        var theChar = str.charCodeAt(i);
+        hash = theChar + (hash << 6) + (hash << 16) - hash;
+    }
+    return Math.abs(hash);
+}
+
 
 /* Functions to work with FS */
 
@@ -112,6 +121,7 @@ function execProcess(command, options, onClose) {
 module.exports = {
     fixUrl: fixUrl,
     validate: validate,
+    getSimpleHash: getSimpleHash,
     encodeBase64: encodeBase64,
     filePath: filePath,
     runFsWatchdog: runFsWatchdog,
